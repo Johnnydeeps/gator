@@ -1,14 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+	"os"
+)
 
 func handlerLogin(appStatePtr *state, cmd command) error {
-	if len(cmd.Args) == 0 {
+	if len(cmd.UserArgs) == 0 {
 		return fmt.Errorf("login requires a username")
 	}
-	username := cmd.Args[0]
+	username := cmd.UserArgs[0]
 
-	err := appStatePtr.configPointer.SetUser(username)
+	_, err := appStatePtr.databasePointer.GetUser(context.Background(), username)
+	if err != nil {
+		fmt.Println("error: user does not exist")
+		os.Exit(1)
+	}
+
+	err = appStatePtr.configPointer.SetUser(username)
 	if err != nil {
 		return err
 	}

@@ -4,8 +4,8 @@ import "fmt"
 
 // singular command struct
 type command struct {
-	Name string
-	Args []string
+	Name     string
+	UserArgs []string
 }
 
 // full list of available command structs, which take a pointer to the shared state struct
