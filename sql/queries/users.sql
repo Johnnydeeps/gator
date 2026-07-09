@@ -12,3 +12,6 @@ RETURNING *;
 select *
 from users
 where name = $1;
+
+-- name: ResetDB :exec
+delete from users;

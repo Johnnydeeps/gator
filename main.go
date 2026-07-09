@@ -45,6 +45,7 @@ func main() {
 	}
 	commands.registerCommand("login", handlerLogin)
 	commands.registerCommand("register", handlerRegister)
+	commands.registerCommand("reset", handlerResetDB)
 
 	if len(os.Args) < 2 {
 		log.Fatal("usage: <command> pass an argument")

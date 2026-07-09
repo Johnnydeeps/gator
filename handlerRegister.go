@@ -13,7 +13,7 @@ import (
 
 func handlerRegister(appStatePtr *state, cmd command) error {
 	if len(cmd.UserArgs) == 0 {
-		return fmt.Errorf("reguster requires a username as an argument")
+		return fmt.Errorf("register requires a username as an argument")
 	}
 	username := cmd.UserArgs[0]
 
