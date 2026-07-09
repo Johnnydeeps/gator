@@ -15,3 +15,7 @@ where name = $1;
 
 -- name: ResetDB :exec
 delete from users;
+
+-- name: GetAllUsers :many
+select *
+from users;
