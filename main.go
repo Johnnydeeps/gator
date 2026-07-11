@@ -52,6 +52,7 @@ func main() {
 	commands.registerCommand("feeds", handlerListFeeds)
 	commands.registerCommand("follow", middlewareLoggedIn(handlerFollowFeed))
 	commands.registerCommand("following", middlewareLoggedIn(handlerUserFollowing))
+	commands.registerCommand("unfollow", middlewareLoggedIn(unfollowFeed))
 
 	if len(os.Args) < 2 {
 		log.Fatal("usage: <command> pass an argument")
