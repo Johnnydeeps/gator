@@ -48,10 +48,10 @@ func main() {
 	commands.registerCommand("reset", handlerResetDB)
 	commands.registerCommand("users", handlerGetAllUsers)
 	commands.registerCommand("agg", handlerAgg)
-	commands.registerCommand("addfeed", addRSSFeedDB)
+	commands.registerCommand("addfeed", middlewareLoggedIn(addRSSFeedDB))
 	commands.registerCommand("feeds", handlerListFeeds)
-	commands.registerCommand("follow", handlerFollowFeed)
-	commands.registerCommand("following", handlerUserFollowing)
+	commands.registerCommand("follow", middlewareLoggedIn(handlerFollowFeed))
+	commands.registerCommand("following", middlewareLoggedIn(handlerUserFollowing))
 
 	if len(os.Args) < 2 {
 		log.Fatal("usage: <command> pass an argument")

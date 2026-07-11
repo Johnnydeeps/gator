@@ -9,18 +9,11 @@ import (
 	"github.com/google/uuid"
 )
 
-func handlerFollowFeed(appStatePtr *state, cmd command) error {
+func handlerFollowFeed(appStatePtr *state, cmd command, user database.User) error {
 	if len(cmd.UserArgs) != 1 {
 		return fmt.Errorf("follow usage: follow <url>")
 	}
 	urlToFollow := cmd.UserArgs[0]
-
-	userconfig := appStatePtr.configPointer.CurrentUserName
-
-	userDB, err := appStatePtr.databasePointer.GetUser(context.Background(), userconfig)
-	if err != nil {
-		return err
-	}
 
 	feedDB, err := appStatePtr.databasePointer.GetFeedByURL(context.Background(), urlToFollow)
 	if err != nil {
@@ -31,7 +24,7 @@ func handlerFollowFeed(appStatePtr *state, cmd command) error {
 		ID:        uuid.New(),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
-		UserID:    userDB.ID,
+		UserID:    user.ID,
 		FeedID:    feedDB.ID,
 	})
 	if err != nil {
