@@ -50,6 +50,8 @@ func main() {
 	commands.registerCommand("agg", handlerAgg)
 	commands.registerCommand("addfeed", addRSSFeedDB)
 	commands.registerCommand("feeds", handlerListFeeds)
+	commands.registerCommand("follow", handlerFollowFeed)
+	commands.registerCommand("following", handlerUserFollowing)
 
 	if len(os.Args) < 2 {
 		log.Fatal("usage: <command> pass an argument")

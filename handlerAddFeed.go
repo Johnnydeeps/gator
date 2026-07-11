@@ -30,7 +30,18 @@ func addRSSFeedDB(appStatePtr *state, cmd command) error {
 	if err != nil {
 		return err
 	}
+	// auto follow a feed a given user creates
+	feedFollow, err := appStatePtr.databasePointer.CreateFeedFollow(context.Background(), database.CreateFeedFollowParams{
+		ID:        uuid.New(),
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		UserID:    user.ID,
+		FeedID:    feed.ID,
+	})
+	if err != nil {
+		return err
+	}
 
-	fmt.Println(feed)
+	fmt.Printf("%s created, %s is now following %s\n", feedFollow.FeedName, feedFollow.UserName, feedFollow.FeedName)
 	return nil
 }
